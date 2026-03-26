@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     anthropic_api_key: str = ""
     google_api_key: str = ""
     log_level: str = "INFO"
-    cors_origins: str = "http://localhost:5173,http://localhost:3000"
+    cors_origins: str = "http://localhost:5173,http://localhost:3000,https://*.vercel.app"
     model_name: str = "claude-sonnet-4-20250514"
     max_retries: int = 3
 

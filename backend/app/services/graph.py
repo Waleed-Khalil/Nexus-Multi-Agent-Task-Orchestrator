@@ -4,13 +4,11 @@ from __future__ import annotations
 
 import json
 import logging
-import uuid
 from collections.abc import AsyncIterator
 from datetime import datetime
-from typing import Annotated, Any, TypedDict
+from typing import Any
 
 import anthropic
-from langgraph.graph import END, StateGraph
 from pydantic import BaseModel
 
 from app.agents.base import AgentRunner
@@ -44,24 +42,6 @@ from app.tools.research import TOOL_DISPATCH as RESEARCH_DISPATCH
 
 logger = logging.getLogger(__name__)
 
-
-def _merge_results(
-    existing: list[SubTaskResult], new: list[SubTaskResult]
-) -> list[SubTaskResult]:
-    """Merge subtask results, keeping the latest for each subtask_id."""
-    by_id = {r.subtask_id: r for r in existing}
-    for r in new:
-        by_id[r.subtask_id] = r
-    return list(by_id.values())
-
-
-class GraphState(TypedDict):
-    query: str
-    plan: list[SubTask]
-    results: Annotated[list[SubTaskResult], _merge_results]
-    current_subtask_idx: int
-    final_answer: str
-    events: list[StreamEvent]
 
 
 def build_agent_runner(agent_type: AgentType, client: anthropic.AsyncAnthropic) -> AgentRunner:

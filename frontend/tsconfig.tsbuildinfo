@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/aboutpanel.tsx","./src/components/agenticon.tsx","./src/components/statusbadge.tsx","./src/components/streampanel.tsx","./src/components/taskhistory.tsx","./src/components/taskinput.tsx","./src/hooks/usetaskstream.ts","./src/types/index.ts","./src/utils/api.ts"],"version":"5.9.3"}

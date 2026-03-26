@@ -1,5 +1,28 @@
 import { useState } from "react";
 
+const examples = [
+  {
+    label: "Research + Code",
+    prompt:
+      "Research the top 3 sorting algorithms by time complexity, then write optimized Python implementations of each with benchmarks.",
+  },
+  {
+    label: "Data Analysis",
+    prompt:
+      "Analyze quarterly revenue data: Q1 $1.2M, Q2 $1.8M, Q3 $1.4M, Q4 $2.3M. Identify trends, detect anomalies, and suggest forecasting approaches.",
+  },
+  {
+    label: "Full Pipeline",
+    prompt:
+      "Research best practices for building REST APIs, then generate a FastAPI CRUD application for a todo list with proper error handling, and analyze the performance characteristics of different database choices.",
+  },
+  {
+    label: "Code Review",
+    prompt:
+      "Write a Python binary search tree implementation with insert, delete, and search operations. Include type hints and validate the code for correctness.",
+  },
+];
+
 interface TaskInputProps {
   onSubmit: (query: string) => void;
   disabled: boolean;
@@ -38,6 +61,22 @@ export function TaskInput({ onSubmit, disabled }: TaskInputProps) {
           }
         }}
       />
+      {!query && !disabled && (
+        <div className="flex flex-wrap gap-2">
+          <span className="self-center text-[11px] text-gray-600">Try:</span>
+          {examples.map((ex) => (
+            <button
+              key={ex.label}
+              type="button"
+              onClick={() => setQuery(ex.prompt)}
+              className="rounded-full border border-gray-700/60 bg-gray-800/40 px-3 py-1 text-[11px] font-medium text-gray-400 transition-colors hover:border-nexus-500/40 hover:bg-nexus-600/10 hover:text-nexus-300"
+            >
+              {ex.label}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="flex items-center justify-between">
         <span className="text-xs text-gray-500">
           {navigator.platform.includes("Mac") ? "⌘" : "Ctrl"}+Enter to submit
